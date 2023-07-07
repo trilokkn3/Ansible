@@ -1,0 +1,26 @@
+---
+- name: Delegate TO 
+  hosts: node2
+  gather_facts: true
+
+  tasks:
+    - name: Delgate to node 2
+      file:
+        dest: /tmp/bazball_node1.txt
+        mode: 664
+        owner: devops
+        state: touch
+      delegate_to: node1
+      delegate_facts: true
+
+    - name: Gather facts from node2
+      setup:
+      delegate_to: node1
+      delegate_facts: true
+      register: facts_node2
+
+
+    - name: Print node2 details
+      debug:
+         msg: "{{ facts_node2.ansible_facts.ansible_all_ipv4_addresses }}"
+

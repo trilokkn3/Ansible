@@ -1,0 +1,9 @@
+---
+- name: Tetsing ternary operator
+  hosts: localhost
+  gather_facts: no
+  
+  tasks:
+   - name: Ternary checking 
+     debug:
+       msg: "{{ lookup('env','PATH') | ternary('Found','Not-Found', omit) }}"

@@ -1,0 +1,24 @@
+---
+- name: TESTS
+  hosts: localhost
+  gather_facts: no
+  vars:
+     secret: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          63346538643061636561393265386465383939366336346636656430333032646661346162336138
+          6137613538663330363437333939323831396165636439340a373136333532373563373633633333
+          36393263643632653866623436396538393365383061386636623866333934333230346537663634
+          3637396466386535340a333234306634656463393235663837616436356161376531636238316633
+          3937
+     truthiness: on
+
+  tasks:
+    - name: Testing MATCH 
+      debug: 
+         msg: "Variable is vault encrypted"
+      when: secret is vault_encrypted
+
+    - name: 
+      debug:
+        msg: "Falsy"
+      when: truthiness is falsy(convert_bool=true)

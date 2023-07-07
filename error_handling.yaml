@@ -1,0 +1,17 @@
+---
+- name: ERROR_HANDLING
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Force a failure
+      command: date
+      ignore_errors: True
+      register: result
+
+    - name: Fail a task when condition is met
+      debug: 
+         msg: "{{ result }}"
+      failed_when: result.failed
+
+      

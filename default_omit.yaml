@@ -1,0 +1,21 @@
+---
+- name: Touch files with Optional mode
+  hosts: all
+  gather_facts: false
+  vars:
+    devops_user: devops
+
+  tasks:
+
+    - name: Create files with Optional mode
+      file:
+        dest: "{{ item.path }}"
+        state: touch
+        mode: "{{ item.mode | default(omit) }}"
+        owner: "{{ devops_user | default(mandoatory) }}"
+      loop:
+        - path: /tmp/foo
+          mode: 666
+        - path: /tmp/bar
+          mode: 444
+        - path: /tmp/baz

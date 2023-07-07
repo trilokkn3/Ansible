@@ -1,0 +1,32 @@
+---
+- name: HANDLERS
+  hosts: all
+
+  tasks:
+     - name: 1st Task
+       command: date
+       notify: 
+         - Hey Hi
+         - Good bye
+
+     - meta: flush_handlers
+
+     - name: 2nd Task
+       command: date
+       ignore_errors: True
+       notify: 
+          - Good bye
+          - Hey Hi
+
+     - meta: flush_handlers
+
+  handlers:
+    - name: FIRST HANDLER
+      debug: 
+         msg: "First handler"
+      listen: Hey Hi 
+
+    - name: SECOND HANDLER
+      debug:
+         msg: "Second handler"
+      listen: Good bye

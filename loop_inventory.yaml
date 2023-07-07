@@ -1,0 +1,15 @@
+---
+- name: LOOP in inventory
+  hosts: all
+  gather_facts: no
+  
+  tasks:
+    - name: Print a message
+      debug:
+         msg: Hi
+    - name: Print registered result
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ query('inventory_hostname', 'all') }}"
+
+

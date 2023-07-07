@@ -1,0 +1,28 @@
+--- 
+- name: Block and Rescue Playbook
+  hosts: all
+  gather_facts: False
+
+  tasks:
+     - name: First BLOCK
+       block:
+         - name: 1st Print message 
+           debug: 
+              msg: This is sucess task
+
+         - name: 2nd Force a FAILURE_here 
+           command: date2
+
+       rescue:
+         - name: RESCUE Print when FAILED  in block section
+           debug: 
+              msg: "RESCUE AS TASK FAILED"
+           notify: RUN ME AFTER RESCUE
+           changed_when: True
+
+  handlers: 
+     - name: RUN ME AFTER RESCUE 
+       debug:
+           msg: HANDLERS is executed
+         
+       

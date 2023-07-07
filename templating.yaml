@@ -1,0 +1,14 @@
+---
+
+- name: Working on templates
+  hosts: node1
+  vars:
+  - var_false: try
+  tasks:
+   - name: Defaults 
+     debug:
+        msg: "{{ message | default('default value') }}"
+   - name: Defaults when varibale return false
+     debug:
+        msg: "{{ lookup('env','PATiH') | default('print_this_when_env_not_found', true) }}"
+

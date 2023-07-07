@@ -1,0 +1,10 @@
+---
+- name: LOOKUP
+  hosts: localhost
+  gather_facts: no
+  vars:
+     playbook: "{{ lookup('file','/home/devops/ANSIBLE/PLAYBOOKS/tests.yaml') }}"
+  tasks:
+    - name: Lookup file and creating variable by reading file 
+      debug: 
+         msg: "{{ playbook | to_yaml }}"

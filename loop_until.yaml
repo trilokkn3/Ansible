@@ -1,0 +1,15 @@
+---
+- name: Tetsing Data Type, dict2items, items2dict
+  hosts: localhost
+  gather_facts: no
+  vars:
+     file_content: "{{ lookup('file', '/usr/bin/foo') }}" 
+
+  tasks:
+   - name: Variable type check
+     debug : 
+        msg: "{{ file_content }}"
+     register: result
+     until: result.msg == 'SUCCESS'
+     delay: 10
+     retries: 3

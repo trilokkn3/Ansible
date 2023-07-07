@@ -1,0 +1,18 @@
+---
+- name: MODULE DEFAULTS
+  hosts: all
+  gather_facts: False
+  module_defaults:
+    file: 
+      owner: devops
+      mode: 0744
+      group: devops
+      state: touch
+
+  tasks:
+    - name: Creating file with module defaults
+      file:
+        dest: /tmp/hello2.txt
+        mode: 0777
+      module_defaults:
+        file: {}

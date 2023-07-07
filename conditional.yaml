@@ -1,0 +1,27 @@
+---
+- name: Conditionals
+  hosts: all
+  gather_facts: true
+  vars:
+     condition: enabled
+
+  tasks:
+    - name: 
+      debug: 
+         msg: "{{ ansible_facts.distribution_version }}"
+      when: ansible_facts.os_family == "Debian" and ansible_facts.distribution_version | int >= 22
+      register: CONDITION
+
+    - name: 
+      debug:
+         msg: Condition met from previous result
+      register: result
+      ignore_errors: True
+      when:
+        - CONDITION.msg > "22.04"
+
+    - name: 
+      debug: 
+         msg: "Result is success or failed or skipped"
+      when : result is skipped
+

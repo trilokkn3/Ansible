@@ -1,0 +1,29 @@
+---
+- name: Tetsing Data Type, dict2items, items2dict
+  hosts: localhost
+  gather_facts: no
+  vars:
+    variable_type: True
+    items_var:
+      - project: container
+        tools: docker
+      - project: monitoring
+        tools: nagios
+
+    dict_var:
+      container: docker 
+      monitoring: nagios
+      infra: ansible
+
+  tasks:
+   - name: Variable type check
+     debug:
+       msg: "{{ variable_type | type_debug }}"
+
+   - name: converting  items to dictionary
+     debug:
+       msg: "{{ items_var | items2dict(key_name='project', value_name='tools')  }}"
+
+   - name: Converting dictionary to items 
+     debug:
+       msg: "{{ dict_var | dict2items(key_name='project', value_name='tools') }}"

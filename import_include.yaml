@@ -1,0 +1,11 @@
+---
+- name: IMPORT AND INCLUDE
+  hosts: all
+  gather_facts: False
+
+  tasks:
+    - name: Testing INCLUDE and IMPORT
+      command: date
+
+- import_playbook: "{{ import_play1 }}"
+- import_playbook: "{{ import_play2 }}" 

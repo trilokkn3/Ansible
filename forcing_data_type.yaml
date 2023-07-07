@@ -1,0 +1,38 @@
+---
+- name: Forcing data_type
+  hosts: localhost
+  gather_facts: yes
+  vars:
+     bool_variable: True
+     items_var:
+      - project: container
+        tools: docker
+      - project: monitoring
+        tools: nagios
+
+     dict_var:
+       container: docker
+       monitoring: nagios
+       infra: ansible
+    
+     int_var: 1000
+
+  tasks:
+    - name: Checking varibale is bool
+      debug:
+         msg: "Its bool"
+      when: bool_variable | bool
+
+    - name: Checking varibale is int and setting integer condition
+      debug:
+         msg: "{{ dict_var | type_debug }}"
+      when: int_var | int > 100
+
+    - name: Check the Ubuntu version if version is greater than 22 then print msg
+      debug: 
+         msg: "Ubuntu is greater than 20 --> {{ ansible_distribution_version }} "
+      when: ansible_distribution_version | int >= 22
+
+
+
+

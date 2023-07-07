@@ -1,0 +1,16 @@
+---
+- name: Other manipulating data
+  hosts: localhost
+  gather_facts: no
+  vars:
+     directory: /etc/ansible/ansible.cfg
+      
+
+  tasks:
+   - name: Variable type check
+     debug:
+       msg: "{{ 'secret' | hash('md5') }}"
+
+   - name: get the directory and file name
+     debug: 
+        msg: "{{ directory  | basename }}"

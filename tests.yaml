@@ -1,0 +1,13 @@
+---
+- name: TESTS
+  hosts: localhost
+  gather_facts: no
+  vars:
+     directory: /etc/ansible/ansible.cfg
+     url: "https://www.google.com/search?q=netcomm+ip+address+ansible"
+
+  tasks:
+    - name: Testing MATCH 
+      debug: 
+         msg: "URL IS MATCHED"
+      when: url is search("google.com/*")

@@ -1,0 +1,23 @@
+---
+- name: YAML and JSON
+  hosts: localhost
+  gather_facts: no
+  vars:
+     yaml_var:
+       - name: devops
+         project: automation
+
+     json_var: {"name": "devops", "project": "automation"} 
+
+  tasks:
+   - name: Converting yaml to json
+     debug:
+        msg: "{{ yaml_var | to_json }}"
+
+   - name: Converting JSON to YAML
+     debug:
+        msg: "{{ json_var | to_yaml }}"
+
+   - name: Convert to JSON
+     debug: 
+        msg: "{{ 'Múnich' | to_json(ensure_ascii=False) }}"

@@ -1,0 +1,39 @@
+---
+- name: LOOPS
+  hosts: localhost
+  gather_facts: no
+  vars:
+    deplyment_data:
+      - app: Payment
+        env: Prod
+      - app: Signup
+        env: Test
+      - app: booking
+        env: Stage
+  
+  
+  tasks:
+    - name: Using loops and testing loops 
+      debug:
+        msg: "Project {{ item.project }} --> uses {{  item.tool }} TOOL"
+      loop:
+        - { project: 'orchestration', tool: 'kubernetes'}
+        - { project: 'automation', tool: 'ansible'}
+        - { project: 'container', tool: 'docker'}
+        - { project: 'cloud', tool: 'aws'}
+      loop_control: 
+          label: "ANSIBLE "
+
+    - name: Interating over dicrtionaries
+      debug:
+         msg: "{{ item.app }} --> {{ item.env }}"
+      loop: "{{ deplyment_data }}"
+      loop_control:
+        pause: 3
+      register: echo
+
+    - name: Print registered result
+      debug:
+         msg: "{{ echo.results[2].item }}"
+
+
