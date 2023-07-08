@@ -1,0 +1,15 @@
+---
+- name: TRYING ROLES 
+  hosts: all
+
+  roles:
+    - DEVOPS
+
+  tasks:
+    - name: COMPLETED ROLES now simple task
+      debug:
+        msg: "Playbook task"
+
+    - name: IMPORT ROLES
+      include_role:
+         name: DEVOPS

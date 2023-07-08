@@ -1,0 +1,13 @@
+---
+- name: TRYING ROLES 
+  hosts: all
+ 
+  tasks:
+    - name: INCLUDE_ROLES
+      include_role: 
+          name: DEVOPS
+
+    - name: INCLUDE_ROLES
+      import_role:
+          name: DEVOPS
+
