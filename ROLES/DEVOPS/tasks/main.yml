@@ -1,0 +1,19 @@
+---
+- name: TASK1 
+  debug:
+    msg: THis is task from Tasks folder
+
+- name: Create file using module defaults
+  file:
+    dest: /tmp/hello_world.txt
+    state: touch
+  tags:
+      - Only_This 
+
+- name: Start and Stop Apache2 and notify handlers
+  debug: 
+    msg: 'echo "Devops@123" | ssh devops@{{ ansible_hostname }} "sudo -S systemctl restart apache2"'
+  notify: HANDLERS
+
+
+
